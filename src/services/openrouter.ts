@@ -122,7 +122,7 @@ export async function generateStickerGrid(imagePath: string): Promise<string> {
     }),
   });
 
-  const result = await response.json();
+  const result = (await response.json()) as any;
 
   if (!response.ok) {
     throw new Error(`OpenRouter API error: ${JSON.stringify(result)}`);

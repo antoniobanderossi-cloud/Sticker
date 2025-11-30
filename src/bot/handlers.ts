@@ -83,19 +83,18 @@ export async function handlePurchase(ctx: MyContext, tokens: number, stars: numb
 
   try {
     // Создаем инвойс для Telegram Stars
-    await ctx.replyWithInvoice(
-      `Покупка ${tokens} ${getTokenWord(tokens)}`,
-      `Пополнение баланса на ${tokens} ${getTokenWord(tokens)}`,
-      JSON.stringify({ tokens }),
-      '', // provider_token пустой для Stars
-      'XTR', // валюта Stars
-      [{ label: `${tokens} токенов`, amount: stars }],
-      {
-        reply_markup: {
-          inline_keyboard: [[{ text: `Оплатить ${stars} ⭐️`, pay: true }]],
-        },
-      }
-    );
+    await ctx.api.raw.sendInvoice({
+      chat_id: ctx.chat!.id,
+      title: `Покупка ${tokens} ${getTokenWord(tokens)}`,
+      description: `Пополнение баланса на ${tokens} ${getTokenWord(tokens)}`,
+      payload: JSON.stringify({ tokens }),
+      provider_token: '',
+      currency: 'XTR',
+      prices: [{ label: `${tokens} токенов`, amount: stars }],
+      reply_markup: {
+        inline_keyboard: [[{ text: `Оплатить ${stars} ⭐️`, pay: true }]],
+      },
+    });
   } catch (error) {
     console.error('Error creating invoice:', error);
     await ctx.reply('❌ Произошла ошибка при создании платежа. Попробуйте позже.');
