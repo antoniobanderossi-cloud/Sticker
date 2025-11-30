@@ -1,0 +1,33 @@
+{
+  "name": "telegram-sticker-bot",
+  "version": "1.0.0",
+  "description": "Telegram bot для создания стикерпаков из фотографий",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "db:generate": "prisma generate",
+    "db:push": "prisma db push",
+    "db:migrate": "prisma migrate dev",
+    "db:studio": "prisma studio"
+  },
+  "keywords": ["telegram", "bot", "stickers"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "grammy": "^1.30.0",
+    "@grammyjs/hydrate": "^1.4.1",
+    "@prisma/client": "^5.22.0",
+    "replicate": "^0.34.1",
+    "sharp": "^0.33.5",
+    "dotenv": "^16.4.5"
+  },
+  "devDependencies": {
+    "@types/node": "^22.9.0",
+    "prisma": "^5.22.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.3"
+  }
+}
